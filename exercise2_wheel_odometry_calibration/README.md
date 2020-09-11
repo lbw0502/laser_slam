@@ -7,3 +7,6 @@
 + ![](https://latex.codecogs.com/gif.latex?b%3D2d): baseline of two wheels  
 + ![](https://latex.codecogs.com/gif.latex?%5Comega): angular velocity of base center
 + ![](https://latex.codecogs.com/gif.latex?v): line velocity of base center
+
+<div align=center><img src = ./doc/motion_model3.png></div>
+<div align=center><img src = ./doc/motion_model2.png></div>
