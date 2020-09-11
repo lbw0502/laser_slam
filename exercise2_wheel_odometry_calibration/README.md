@@ -1,5 +1,5 @@
 # Wheel odometry calibration
-### differential wheel motion model
+### Differential wheel motion model
 <div align=center><img src = ./doc/motion_model1.png></div>
 
 + ![](https://latex.codecogs.com/gif.latex?%5Comega_R%2C%5Comega_L%3A) angular velocity of wheel  
@@ -10,3 +10,7 @@
 
 <div align=center><img src = ./doc/motion_model3.png></div>
 <div align=center><img src = ./doc/motion_model2.png></div>
+
+### Wheel odometry calibration
+
+Suppose the robto does unifor motion in ![](https://latex.codecogs.com/gif.latex?%5CDelta%20t), 
