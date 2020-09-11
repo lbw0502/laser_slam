@@ -19,4 +19,19 @@ so we have
 
 ### Wheel odometry calibration
 
-Suppose the robto does unifor motion in ![](https://latex.codecogs.com/gif.latex?%5CDelta%20t), 
+Suppose the robto does unifor motion in ![](https://latex.codecogs.com/gif.latex?%5CDelta%20t), considering the angular integration of wheel odometry,
+<div align=center><img src = ./doc/calibr3.png></div>
+
+With n observations, we can construct a least square problem
+<div align=center><img src = ./doc/calibr4.png></div>
+
+where ![](https://latex.codecogs.com/gif.latex?S_%7B%5Ctheta%7D) is the angular increment measured by laser scanner.
+
+Once ![](https://latex.codecogs.com/gif.latex?J_%7B21%7D) and ![](https://latex.codecogs.com/gif.latex?J_%7B22%7D) is known, considering the position integration of wheel odometry,
+<div align=center><img src = ./doc/calibr5.png></div>
+
+With n observations, we can construct another least square problem
+<div align=center><img src = ./doc/calibr6.png></div>
+
+
+
