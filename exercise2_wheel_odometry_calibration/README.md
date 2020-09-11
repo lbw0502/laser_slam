@@ -11,6 +11,12 @@
 <div align=center><img src = ./doc/motion_model3.png></div>
 <div align=center><img src = ./doc/motion_model2.png></div>
 
+so we have
+<div align=center><img src = ./doc/calibr1.png></div>
+<div align=center><img src = ./doc/calibr2.png></div>
+
+
+
 ### Wheel odometry calibration
 
 Suppose the robto does unifor motion in ![](https://latex.codecogs.com/gif.latex?%5CDelta%20t), 
