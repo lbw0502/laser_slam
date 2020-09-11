@@ -48,3 +48,4 @@ data format: time stamp, position increment(x), position increment(y), angular i
 **run**  
 `./odom_calib`  
 **result**
+<div align=center><img src = ./doc/result.png></div>
