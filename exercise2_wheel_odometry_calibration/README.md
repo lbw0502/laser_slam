@@ -33,5 +33,7 @@ Once ![](https://latex.codecogs.com/gif.latex?J_%7B21%7D) and ![](https://latex.
 With n observations, we can construct another least square problem
 <div align=center><img src = ./doc/calibr6.png></div>
 
+where ![](https://latex.codecogs.com/gif.latex?s_%7Bx%7D) and ![](https://latex.codecogs.com/gif.latex?s_%7By%7D) are position increment measured by laser scanner.
 
-
+Once ![](https://latex.codecogs.com/gif.latex?J_%7B21%7D) and ![](https://latex.codecogs.com/gif.latex?J_%7B22%7D) and b is known,
+<div align=center><img src = ./doc/calibr7.png></div>
