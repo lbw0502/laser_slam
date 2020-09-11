@@ -37,3 +37,9 @@ where ![](https://latex.codecogs.com/gif.latex?s_%7Bx%7D) and ![](https://latex.
 
 Once ![](https://latex.codecogs.com/gif.latex?J_%7B21%7D) and ![](https://latex.codecogs.com/gif.latex?J_%7B22%7D) and b is known,
 <div align=center><img src = ./doc/calibr7.png></div>
+
+### Code
+**odom.txt** contains wheel odometry data  
+data format: time stamp, left wheel angualr velocity, right wheel angular velocity  
+**scan_match** contains laser scanner data  
+data format: time stamp, position increment(x), position increment(y), angular incremnet  
