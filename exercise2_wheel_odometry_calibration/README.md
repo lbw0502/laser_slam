@@ -1,2 +1,9 @@
 # Wheel odometry calibration
 ### differential wheel motion model
+<div align=center><img src = ./doc/motion_model1.png></div>
+
++ ![](https://latex.codecogs.com/gif.latex?%5Comega_R%2C%5Comega_L%3A) angular velocity of wheel  
++ ![](https://latex.codecogs.com/gif.latex?v_R%2Cv_L%3A) line velocity of wheel  
++ ![](https://latex.codecogs.com/gif.latex?b%3D2d): baseline of two wheels  
++ ![](https://latex.codecogs.com/gif.latex?%5Comega): angular velocity of base center
++ ![](https://latex.codecogs.com/gif.latex?v): line velocity of base center
