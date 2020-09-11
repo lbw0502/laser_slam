@@ -43,3 +43,8 @@ Once ![](https://latex.codecogs.com/gif.latex?J_%7B21%7D) and ![](https://latex.
 data format: time stamp, left wheel angualr velocity, right wheel angular velocity  
 **scan_match** contains laser scanner data  
 data format: time stamp, position increment(x), position increment(y), angular incremnet  
+
+**compile the code**  
+**run**  
+`./odom_calib`  
+**result**
