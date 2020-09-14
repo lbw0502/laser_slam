@@ -29,3 +29,18 @@ sudo su
 source /opt/ros/kinetic/setup.bash
 catkin_make -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/opt/ros/kinetic install
 ```
+
+2. build and run  
+```
+cd exercise3_Laser_distortion
+catkin_make
+source devel/setup.bash
+roslaunch LaserUndistortion LaserUndistortion.launch
+cd exercise3_Laser_distortion/bag
+rosbag play --clock laser.bag
+```
+
+3. result
+<dev align=center><img src=./doc/result1.png></dev>
+
+<dev align=center><img src=./doc/result2.png></dev>
