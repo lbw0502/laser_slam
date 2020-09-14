@@ -40,7 +40,11 @@ cd exercise3_Laser_distortion/bag
 rosbag play --clock laser.bag
 ```
 
-3. result
+3. result  
+
 <dev align=center><img src=./doc/result1.png></dev>
 
 <dev align=center><img src=./doc/result2.png></dev>
+
++ the raw laser data is shown with red  
++ the calibrated laser data is shown with green
