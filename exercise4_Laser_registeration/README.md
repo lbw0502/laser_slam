@@ -60,3 +60,28 @@ Now we want to localize the current scan ![](https://latex.codecogs.com/gif.late
 Now the new cost function is: 
 
 <dev align=center><img src=./doc/imls6.png></dev>
+
+
+### Code
+`champion_nav_msgs` has to be installed
+```
+cd exercise4_Laser_registeration
+catkin_make
+source devel/setup.bash
+```
+**1. use IMLS to register the laser data**
+
+`rosrun imlsMatcher imlsMatcher_node`
+
+result is shown in rviz
+
+<dev align=center><img src=./doc/result_imls.png></dev>
+
+**2. use cms library(point-to-line) to register the laser data**
+
+`rosrun csmMatcher csmMatcher_node`
+
+result is shown in rviz
+
+<dev align=center><img src=./doc/result_cms.png></dev>
+
