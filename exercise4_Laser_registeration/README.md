@@ -73,7 +73,11 @@ source devel/setup.bash
 
 `rosrun imlsMatcher imlsMatcher_node`
 
-result is shown in rviz
+result is shown in rviz, 
+
+red path: from odometry 
+
+green path: from IMLS
 
 <dev align=center><img src=./doc/result_imls.png></dev>
 
@@ -81,7 +85,11 @@ result is shown in rviz
 
 `rosrun csmMatcher csmMatcher_node`
 
-result is shown in rviz
+result is shown in rviz,
+
+red path: from odometry 
+
+green path: from csm
 
 <dev align=center><img src=./doc/result_csm.png></dev>
 
