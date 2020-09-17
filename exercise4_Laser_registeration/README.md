@@ -42,3 +42,12 @@ where ![](https://latex.codecogs.com/gif.latex?u_x) and ![](https://latex.codeco
 
 
 ### IMLS(Implicit Moving Least Square) ICP
+
+<dev align=center><img src=./doc/imls1.png></dev>
+
+IMLS defines a function ![](https://latex.codecogs.com/gif.latex?I%5E%7BP_k%7D%28x%29) as an approximate distance of any point x in ![](https://latex.codecogs.com/gif.latex?%5Cmathbb%7BR%7D%5E3) to the implicit surface defined by the point cloud ![](https://latex.codecogs.com/gif.latex?P_k)
+
+<dev align=center><img src=./doc/imls2.png></dev>
+
+
+
