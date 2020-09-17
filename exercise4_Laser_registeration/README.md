@@ -77,11 +77,11 @@ result is shown in rviz
 
 <dev align=center><img src=./doc/result_imls.png></dev>
 
-**2. use cms library(point-to-line) to register the laser data**
+**2. use csm library(point-to-line) to register the laser data**
 
 `rosrun csmMatcher csmMatcher_node`
 
 result is shown in rviz
 
-<dev align=center><img src=./doc/result_cms.png></dev>
+<dev align=center><img src=./doc/result_csm.png></dev>
 
