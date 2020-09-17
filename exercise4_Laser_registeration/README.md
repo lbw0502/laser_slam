@@ -49,5 +49,14 @@ IMLS defines a function ![](https://latex.codecogs.com/gif.latex?I%5E%7BP_k%7D%2
 
 <dev align=center><img src=./doc/imls2.png></dev>
 
+the weights ![](https://latex.codecogs.com/gif.latex?W_i%28x%29) are defined as:
 
+<dev align=center><img src=./doc/imls3.png></dev>
 
+and ![](https://latex.codecogs.com/gif.latex?n_i) is normal vector of point ![](https://latex.codecogs.com/gif.latex?p_i)
+
+Now we want to localize the current scan ![](https://latex.codecogs.com/gif.latex?S_k) in previous scan ![](https://latex.codecogs.com/gif.latex?P_k). To do so, we want to minimize the sum of squared IMLS distances: ![](./doc/imls4.png). Due to exponential weights, we cannot approximate that nonlinear least-square optimization problem by a linear least-square one, as in ICP point to plane. Instead of minimizing that sum, we project every point ![](https://latex.codecogs.com/gif.latex?x_j) of ![](https://latex.codecogs.com/gif.latex?S_k) on the IMLS surface defined by ![](./doc/imls5.png) where ![](https://latex.codecogs.com/gif.latex?n_j) is the normal of the closest point to ![](https://latex.codecogs.com/gif.latex?x_j) and is a good approximation of the surface normal at projected point ![](https://latex.codecogs.com/gif.latex?y_i)
+
+Now the new cost function is: 
+
+<dev align=center><img src=./doc/imls.png></dev>
