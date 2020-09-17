@@ -27,5 +27,18 @@ where ![](https://latex.codecogs.com/gif.latex?u_x) and ![](https://latex.codeco
 <dev align=center><img src=./doc/icp7.png></dev>
 
 + the closed solution of ICP is 
+
 <dev align=center><img src=./doc/icp8.png></dev>
 
+**when the corresponding point pairs are unknown**  
+
++ find corresponding points(nearest points)
+
++ compute R and t according to matched points
+
++ apply R and t to source point cloud, compute the error
+
++ iterate until the error is smaller than a threshold
+
+
+### IMLS(Implicit Moving Least Square) ICP
