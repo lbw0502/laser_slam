@@ -59,4 +59,4 @@ Now we want to localize the current scan ![](https://latex.codecogs.com/gif.late
 
 Now the new cost function is: 
 
-<dev align=center><img src=./doc/imls.png></dev>
+<dev align=center><img src=./doc/imls6.png></dev>
