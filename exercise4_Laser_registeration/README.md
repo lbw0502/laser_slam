@@ -22,6 +22,7 @@ where ![](https://latex.codecogs.com/gif.latex?u_x) and ![](https://latex.codeco
 
 + center the point cloud
 <dev align=center><img src=./doc/icp6.png></dev>
+
 <dev align=center><img src=./doc/icp7.png></dev>
 
 + the closed solution of ICP is 
