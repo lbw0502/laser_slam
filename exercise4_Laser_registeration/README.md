@@ -16,10 +16,6 @@ find rotation matrxi R and translation t to minimize
 
 **when the corresponding point pairs are known**  
 
-+ ![](./doc/icp4.png)
++ ![](./doc/icp4.png), ![](./doc/icp5.png), 
 
-where,![](https://latex.codecogs.com/gif.latex?u_x)  represents the center of point cloud X
-
-+ ![](./doc/icp5.png), 
-
-where ![](https://latex.codecogs.com/gif.latex?u_p) represents the center of point cloud P
+where ![](https://latex.codecogs.com/gif.latex?u_x) and ![](https://latex.codecogs.com/gif.latex?u_p) represent the center of point cloud X and point cloud P.
