@@ -21,6 +21,7 @@ find rotation matrxi R and translation t to minimize
 where ![](https://latex.codecogs.com/gif.latex?u_x) and ![](https://latex.codecogs.com/gif.latex?u_p) represent the center of point cloud X and point cloud P.
 
 + center the point cloud
+
 <dev align=center><img src=./doc/icp6.png></dev>
 
 <dev align=center><img src=./doc/icp7.png></dev>
