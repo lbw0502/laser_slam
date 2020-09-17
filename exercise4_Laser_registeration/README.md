@@ -1,4 +1,4 @@
-＃　Laser Registeration algorithm
+# Laser Registeration algorithm
 
 ### ICP
 
