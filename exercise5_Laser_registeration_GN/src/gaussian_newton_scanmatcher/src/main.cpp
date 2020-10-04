@@ -19,7 +19,7 @@ public:
         m_gaussianNewtonPub = m_nh.advertise<nav_msgs::Path>("gaussian_newton_path",1,true);
     }
 
-    //单纯的数据类型转换，不进行坐标系转换．
+    // convert data format
     void ConvertChampionLaserScanToEigenPointCloud(const sensor_msgs::LaserScanConstPtr& msg,
                                                    std::vector<Eigen::Vector2d>& eigen_pts)
     {
@@ -97,14 +97,14 @@ public:
         {
             return ;
         }
-        //数据类型转换．
+
         std::vector<Eigen::Vector2d> nowPts;
         ConvertChampionLaserScanToEigenPointCloud(msg,nowPts);
-        //用上一帧激光数据生成地图
+        // generate map using last laser frame
         map_t* map = CreateMapFromLaserPoints(m_prevLaserPose,m_prevPts,0.1);
 
-        //进行优化．
-        //初始解为上一帧激光位姿+运动增量
+        // optimization
+        // initial pose: last laser pose + incremnet
         Eigen::Vector3d deltaPose = nowPose - m_odomPath.back();
         deltaPose(2) = GN_NormalizationAngle(deltaPose(2));
 
@@ -125,17 +125,17 @@ public:
         std::cout << "Init Pose:" << finalPose.transpose() << std::endl;
         GaussianNewtonOptimization(map,finalPose,nowPts);
 
-        //更新数据．
+        
         m_prevLaserPose = finalPose;
         m_prevPts = nowPts;
 
         std::cout <<"Final Pose:"<<finalPose.transpose()<<std::endl<< std::endl;
 
 
-        //释放地图
+        // release the map
         map_free(map);
 
-        //保存路径．
+        // save the path
         m_odomPath.push_back(nowPose);
         m_gaussianNewtonPath.push_back(finalPose);
 

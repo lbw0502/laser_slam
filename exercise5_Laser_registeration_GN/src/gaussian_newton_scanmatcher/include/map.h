@@ -46,9 +46,7 @@ struct _rtk_fig_t;
 
 
 // Description for a single map cell.
-/**
- *单独的地图cell类型
- */
+
 typedef struct
 {
   // Occupancy state (-1 = free, 0 = unknown, +1 = occ)
@@ -66,18 +64,16 @@ typedef struct
 
 
 // Description for a map
-/**
- *地图的数据结构
- */
+
 typedef struct
 {
   // Map origin; the map is a viewport onto a conceptual larger map.
   double origin_x, origin_y;
 
-  // Map scale (m/cell) 地图的分辨率
+  // Map scale (m/cell) 
   double resolution;
 
-  // Map dimensions (number of cells) X Y方向的栅格束
+  // Map dimensions (number of cells) 
   int size_x, size_y;
 
   // The map data, stored as a grid
@@ -85,13 +81,12 @@ typedef struct
 
   // Max distance at which we care about obstacles, for constructing
   // likelihood field
-  double max_occ_dist; //在似然场模型中，障碍物影响的最大距离
+  double max_occ_dist;
 
   double min_score;
 
 
-  double likelihood_sigma; //似然场的标准差
-
+  double likelihood_sigma;
 } map_t;
 
 
@@ -101,16 +96,16 @@ typedef struct
  * Basic map functions
  **************************************************************************/
 
-// Create a new (empty) map 创建一个空地图
+// Create a new (empty) map 
 map_t *map_alloc(void);
 
-// Destroy a map    释放地图的内存
+// Destroy a map    
 void map_free(map_t *map);
 
-// Get the cell at the given point 返回某一个地图栅格
+// Get the cell at the given point 
 map_cell_t *map_get_cell(map_t *map, double ox, double oy, double oa);
 
-// Update the cspace distances 更新地图的似然场模型中的最大影响距离
+// Update the cspace distances
 void map_update_cspace(map_t *map, double max_occ_dist);
 
 
@@ -120,21 +115,21 @@ void map_update_cspace(map_t *map, double max_occ_dist);
  * Map manipulation macros
  **************************************************************************/
 
-// Convert from map index to world coords  地图坐标转换到世界坐标
+// Convert from map index to world coords 
 #define MAP_WXGX(map, i) (map->origin_x + ((i) - map->size_x / 2) * map->resolution)
 #define MAP_WYGY(map, j) (map->origin_y + ((j) - map->size_y / 2) * map->resolution)
 
-// Convert from world coords to map coords 世界坐标转换到地图坐标
+// Convert from world coords to map coords 
 #define MAP_GXWX(map, x) (floor((x - map->origin_x) / map->resolution + 0.5) + map->size_x / 2)
 #define MAP_GYWY(map, y) (floor((y - map->origin_y) / map->resolution + 0.5) + map->size_y / 2)
 
 #define MAP_GXWX_DOUBLE(map, x) ((x - map->origin_x) / map->resolution + 0.5 + double(map->size_x / 2))
 #define MAP_GYWY_DOUBLE(map, y) ((y - map->origin_y) / map->resolution + 0.5 + double(map->size_y / 2))
 
-// Test to see if the given map coords lie within the absolute map bounds. 判断是否出界
+// Test to see if the given map coords lie within the absolute map bounds. 
 #define MAP_VALID(map, i, j) ((i >= 0) && (i < map->size_x) && (j >= 0) && (j < map->size_y))
 
-// Compute the cell index for the given map coords. 把地图坐标转化为Index
+// Compute the cell index for the given map coords. 
 #define MAP_INDEX(map, i, j) ((i) + (j) * map->size_x)
 
 #ifdef __cplusplus

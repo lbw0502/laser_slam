@@ -3,7 +3,6 @@
 
 const double GN_PI = 3.1415926;
 
-//进行角度正则化．
 double GN_NormalizationAngle(double angle)
 {
     if(angle > GN_PI)
@@ -24,7 +23,6 @@ Eigen::Matrix3d GN_V2T(Eigen::Vector3d vec)
     return T;
 }
 
-//对某一个点进行转换．
 Eigen::Vector2d GN_TransPoint(Eigen::Vector2d pt,Eigen::Matrix3d T)
 {
     Eigen::Vector3d tmp_pt(pt(0),pt(1),1);
@@ -34,7 +32,7 @@ Eigen::Vector2d GN_TransPoint(Eigen::Vector2d pt,Eigen::Matrix3d T)
 
 
 
-//用激光雷达数据创建势场．
+// use laser data to generate a likelihood field
 map_t* CreateMapFromLaserPoints(Eigen::Vector3d map_origin_pt,
                                 std::vector<Eigen::Vector2d> laser_pts,
                                 double resolution)
@@ -45,18 +43,17 @@ map_t* CreateMapFromLaserPoints(Eigen::Vector3d map_origin_pt,
     map->origin_y = map_origin_pt(1);
     map->resolution = resolution;
 
-    //固定大小的地图，必要时可以扩大．
+    // map size
     map->size_x = 10000;
     map->size_y = 10000;
 
     map->cells = (map_cell_t*)malloc(sizeof(map_cell_t)*map->size_x*map->size_y);
 
-    //高斯平滑的sigma－－固定死
     map->likelihood_sigma = 0.5;
 
     Eigen::Matrix3d Trans = GN_V2T(map_origin_pt);
 
-    //设置障碍物
+    // set obstacle
     for(int i = 0; i < laser_pts.size();i++)
     {
         Eigen::Vector2d tmp_pt = GN_TransPoint(laser_pts[i],Trans);
@@ -68,7 +65,7 @@ map_t* CreateMapFromLaserPoints(Eigen::Vector3d map_origin_pt,
         map->cells[MAP_INDEX(map,cell_x,cell_y)].occ_state = CELL_STATUS_OCC;
     }
 
-    //进行障碍物的膨胀--最大距离固定死．
+    // dilation of obstacles, max distance is 0.5
     map_update_cspace(map,0.5);
 
     return map;
@@ -77,10 +74,9 @@ map_t* CreateMapFromLaserPoints(Eigen::Vector3d map_origin_pt,
 
 /**
  * @brief InterpMapValueWithDerivatives
- * 在地图上的进行插值，得到coords处的势场值和对应的关于位置的梯度．
- * 返回值为Eigen::Vector3d ans
- * ans(0)表示市场值
- * ans(1:2)表示梯度
+ * map interpolation, get the gradient at coords
+ * ans(0) is likelihood value
+ * ans(1:2) is gradient w.r.t position
  * @param map
  * @param coords
  * @return
@@ -116,7 +112,7 @@ Eigen::Vector3d InterpMapValueWithDerivatives(map_t* map,Eigen::Vector2d& coords
 
 /**
  * @brief ComputeCompleteHessianAndb
- * 计算H*dx = b中的H和b
+ * compute H and b for Hx = b
  * @param map
  * @param now_pose
  * @param laser_pts
@@ -164,7 +160,7 @@ double ComputeHessianAndb(map_t* map, Eigen::Vector3d now_pose,
 
 /**
  * @brief GaussianNewtonOptimization
- * 进行高斯牛顿优化．
+ * Gauss-Newton optimization
  * @param map
  * @param init_pose
  * @param laser_pts
@@ -183,12 +179,10 @@ void GaussianNewtonOptimization(map_t*map,Eigen::Vector3d& init_pose,std::vector
         Eigen::Matrix3d H = Eigen::Matrix3d::Zero();
         Eigen::Vector3d b = Eigen::Vector3d::Zero();
 
-        //TODO
         double residual = ComputeHessianAndb(map, now_pose, laser_pts, H, b);
         if(min_residual < residual || fabs(min_residual - residual) < epsilon)
             break;
-        //END OF TODO
-
+            
         min_residual = residual;
 
         Eigen::Vector3d delta = H.ldlt().solve(b) * scale;

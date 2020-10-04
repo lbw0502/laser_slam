@@ -35,10 +35,9 @@ class CellData
 };
 
 /*
- * 这里的CachedDistanceMap实际上是一个以(0,0)为中心的局部距离地图
- * 这个地图的每一个点都存储这该点的坐标到(0,0)的欧几里得距离。
- * 这里的CacheDistanceMap是用来计算栅格离障碍物距离的时候减少计算量的。
- * 相当于开始进行一次计算的话，后面只要查表就可以计算出来距离，而不需要反复的调用sqrt来求解
+ * CachedDistanceMap is actually a distance map which is centered at (0,0)
+ * each cell in this map stores the distance between the origin
+ * this is for computation of distance between each grid and obstacles, we only need to check the table instead of computing sqrt in every iteration
 */
 class CachedDistanceMap
 {
@@ -46,7 +45,7 @@ class CachedDistanceMap
     CachedDistanceMap(double scale, double max_dist) :
       distances_(NULL), scale_(scale), max_dist_(max_dist)
     {
-      //最大距离对应的cell的个数
+      // cell number w.r.t maximum distance
       cell_radius_ = max_dist / scale;
 
       distances_ = new double *[cell_radius_+2];
@@ -95,14 +94,14 @@ CachedDistanceMap* get_distance_map(double scale, double max_dist)
   return cdm;
 }
 
-//计算到障碍物的距离
+// compute the distance between the obstacle
 /**
  * @brief enqueue
- * @param map       对应的地图
- * @param i         该点对应的x坐标
- * @param j         该点对应的y坐标
- * @param src_i     该点对应的障碍物的x坐标
- * @param src_j     该点对应的障碍物的y坐标
+ * @param map       corresponding map
+ * @param i         x coordinate in map
+ * @param j         y coordinate in map
+ * @param src_i     x coordinate of obstacle
+ * @param src_j     y coordinate of obstacle
  * @param Q
  * @param cdm
  * @param marked
@@ -113,11 +112,11 @@ void enqueue(map_t* map, unsigned int i, unsigned int j,
 	     CachedDistanceMap* cdm,
 	     unsigned char* marked)
 {
-  //如果已经被计算过了 则直接返回
+  // if the cell is already visted, return
   if(marked[MAP_INDEX(map, i, j)])
     return;
 
-  //这里的距离是栅格的距离
+  // find the distacne in distance map
   unsigned int di = abs(i - src_i);
   unsigned int dj = abs(j - src_j);
   double distance = cdm->distances_[di][dj];
@@ -125,7 +124,7 @@ void enqueue(map_t* map, unsigned int i, unsigned int j,
   if(distance > cdm->cell_radius_)
     return;
 
-  //转换为实际距离
+  // convert to real distance
   map->cells[MAP_INDEX(map,i,j)].occ_dist = distance * map->resolution;
 
   double z = map->cells[MAP_INDEX(map,i,j)].occ_dist;
@@ -148,8 +147,9 @@ void enqueue(map_t* map, unsigned int i, unsigned int j,
 
 /**
  * @brief map_update_cspace
- * 更新地图的距离值 这个函数用来计算用来定位的地图中的每个栅格到最近障碍物的距离
- * 其中障碍物的栅格的距离为0 然后通过dfs进行搜索来计算每一个栅格到障碍物的距离
+ * update the distance in the map
+ * the distance for obstacle is 0, the distance for other grids depend how far thay are from obstacle
+ * use dfs to traverse the whole map
  * @param map
  * @param max_occ_dist
  */
@@ -163,43 +163,39 @@ void map_update_cspace(map_t *map, double max_occ_dist)
 
   map->max_occ_dist = max_occ_dist;
 
-  //得到一个CachedDistanceMap
+  // get a distance map
   CachedDistanceMap* cdm = get_distance_map(map->resolution, map->max_occ_dist);
 
-  //这个sigma已经在外面设置过了 在handmapmsg里面就会设置
   map->min_score = exp(-max_occ_dist * max_occ_dist / (2 * map->likelihood_sigma * map->likelihood_sigma));
 
   // Enqueue all the obstacle cells
-  // 所有的障碍物都放入队列中
   CellData cell;
   cell.map_ = map;
 
-  //计算出来所有的边界障碍物 只有边界障碍物才用来进行匹配 其他的障碍物都当成no-information
-
-    /*所有障碍物的栅格  离障碍物的距离都标志为0  非障碍物的栅格都标记为max_occ_dist*/
-    for(int i=0; i<map->size_x; i++)
-    {
-        cell.src_i_ = cell.i_ = i;
-        for(int j=0; j<map->size_y; j++)
-        {
-            if(map->cells[MAP_INDEX(map, i, j)].occ_state == CELL_STATUS_OCC)
-            {
-                map->cells[MAP_INDEX(map, i, j)].occ_dist = 0.0;
-                map->cells[MAP_INDEX(map,i,j)].score = 1.0;
-                cell.src_j_ = cell.j_ = j;
-                marked[MAP_INDEX(map, i, j)] = 1;
-                Q.push(cell);
-            }
-            else
-                map->cells[MAP_INDEX(map, i, j)].occ_dist = max_occ_dist;
-        }
-    }
+  // for all grids, if it is a obstacle grid, set it to 0, otherwise set it to max_occ_dist
+  for(int i=0; i<map->size_x; i++)
+  {
+      cell.src_i_ = cell.i_ = i;
+      for(int j=0; j<map->size_y; j++)
+      {
+          if(map->cells[MAP_INDEX(map, i, j)].occ_state == CELL_STATUS_OCC)
+          {
+              map->cells[MAP_INDEX(map, i, j)].occ_dist = 0.0;
+              map->cells[MAP_INDEX(map,i,j)].score = 1.0;
+              cell.src_j_ = cell.j_ = j;
+              marked[MAP_INDEX(map, i, j)] = 1;
+              Q.push(cell);
+          }
+          else
+              map->cells[MAP_INDEX(map, i, j)].occ_dist = max_occ_dist;
+      }
+  }
 
   while(!Q.empty())
   {
     CellData current_cell = Q.top();
 
-    /*往上、下、左、右四个方向拓展*/
+    // dfs: up, down, left, right
     if(current_cell.i_ > 0)
       enqueue(map, current_cell.i_-1, current_cell.j_,
 	      current_cell.src_i_, current_cell.src_j_,
