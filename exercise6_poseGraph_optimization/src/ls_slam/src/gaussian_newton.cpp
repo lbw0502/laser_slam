@@ -8,7 +8,7 @@
 #include <iostream>
 
 
-//位姿-->转换矩阵
+// pose -> transform matrix
 Eigen::Matrix3d PoseToTrans(Eigen::Vector3d x)
 {
     Eigen::Matrix3d trans;
@@ -20,7 +20,7 @@ Eigen::Matrix3d PoseToTrans(Eigen::Vector3d x)
 }
 
 
-//转换矩阵－－＞位姿
+// transform matrix -> pose
 Eigen::Vector3d TransToPose(Eigen::Matrix3d trans)
 {
     Eigen::Vector3d pose;
@@ -31,7 +31,7 @@ Eigen::Vector3d TransToPose(Eigen::Matrix3d trans)
     return pose;
 }
 
-//计算整个pose-graph的误差
+// compute error of pose graph
 double ComputeError(std::vector<Eigen::Vector3d>& Vertexs,
                     std::vector<Edge>& Edges)
 {
@@ -61,13 +61,13 @@ double ComputeError(std::vector<Eigen::Vector3d>& Vertexs,
 
 /**
  * @brief CalcJacobianAndError
- *         计算jacobian矩阵和error
+ *        compute jacobian matrix and error
  * @param xi    fromIdx
  * @param xj    toIdx
- * @param z     观测值:xj相对于xi的坐标
- * @param ei    计算的误差
- * @param Ai    相对于xi的Jacobian矩阵
- * @param Bi    相对于xj的Jacobian矩阵
+ * @param z     the coordinate of xj w.r.t frame xi
+ * @param ei    error
+ * @param Ai    Jacobian matrix w.r.t xi
+ * @param Bi    Jacobian matrix w.r.t xj
  */
 void CalcJacobianAndError(Eigen::Vector3d xi,Eigen::Vector3d xj,Eigen::Vector3d z,
                           Eigen::Vector3d& ei,Eigen::Matrix3d& Ai,Eigen::Matrix3d& Bi)
@@ -102,37 +102,36 @@ void CalcJacobianAndError(Eigen::Vector3d xi,Eigen::Vector3d xj,Eigen::Vector3d 
 
 /**
  * @brief LinearizeAndSolve
- *        高斯牛顿方法的一次迭代．
- * @param Vertexs   图中的所有节点
- * @param Edges     图中的所有边
- * @return          位姿的增量
+ *        one iteration in Gauss-Newton
+ * @param Vertexs   Verticies in graph
+ * @param Edges     edges in graph
+ * @return          increment of pose
  */
 Eigen::VectorXd  LinearizeAndSolve(std::vector<Eigen::Vector3d>& Vertexs,
                                    std::vector<Edge>& Edges)
 {
-    //申请内存
+
     Eigen::MatrixXd H(Vertexs.size() * 3,Vertexs.size() * 3);
     Eigen::VectorXd b(Vertexs.size() * 3);
 
     H.setZero();
     b.setZero();
 
-    //固定第一帧
+    // fix the first frame
     Eigen::Matrix3d I;
     I.setIdentity();
     H.block(0,0,3,3) += I;
 
-    //构造H矩阵　＆ b向量
+    // construct H and b
     for(int i = 0; i < Edges.size();i++)
     {
-        //提取信息
         Edge tmpEdge = Edges[i];
         Eigen::Vector3d xi = Vertexs[tmpEdge.xi];
         Eigen::Vector3d xj = Vertexs[tmpEdge.xj];
         Eigen::Vector3d z = tmpEdge.measurement;
         Eigen::Matrix3d infoMatrix = tmpEdge.infoMatrix;
 
-        //计算误差和对应的Jacobian
+        // compute error and jacobian
         Eigen::Vector3d ei;
         Eigen::Matrix3d Ai;
         Eigen::Matrix3d Bi;
@@ -162,21 +161,11 @@ Eigen::VectorXd  LinearizeAndSolve(std::vector<Eigen::Vector3d>& Vertexs,
 
     }
 
-    //求解
     Eigen::VectorXd dx;
-
     dx = -H.lu().solve(b);
 
     return dx;
 }
-
-
-
-
-
-
-
-
 
 
 

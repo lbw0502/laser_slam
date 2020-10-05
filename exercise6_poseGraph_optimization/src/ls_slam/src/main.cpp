@@ -72,7 +72,7 @@ void PublishGraphForVisulization(ros::Publisher* pub,
     m.action = visualization_msgs::Marker::ADD;
     uint id = 0;
 
-    //加入节点
+    // add vertex
     for (uint i=0; i<Vertexs.size(); i++)
     {
         m.id = id;
@@ -82,7 +82,7 @@ void PublishGraphForVisulization(ros::Publisher* pub,
         id++;
     }
 
-    //加入边
+    // add edge
     for(int i = 0; i < Edges.size();i++)
     {
         Edge tmpEdge = Edges[i];
@@ -122,9 +122,6 @@ int main(int argc, char **argv)
 
     std::string VertexPath = "./src/ls_slam/data/test_quadrat-v.dat";
     std::string EdgePath = "./src/ls_slam/data/test_quadrat-e.dat";
-
-//    std::string VertexPath = "/home/eventec/LSSLAMProject/src/ls_slam/data/intel-v.dat";
-//    std::string EdgePath = "/home/eventec/LSSLAMProject/src/ls_slam/data/intel-e.dat";
 
     std::vector<Eigen::Vector3d> Vertexs;
     std::vector<Edge> Edges;

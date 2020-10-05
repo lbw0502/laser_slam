@@ -24,7 +24,7 @@ std::vector<std::string> splitString(const std::string &s, const std::string &se
 
     while(i != s.size())
     {
-        //找到字符串中首个不等于分隔符的字母；
+        // find the first character before separator in the string
         int flag = 0;
         while(i != s.size() && flag == 0)
         {
@@ -40,7 +40,7 @@ std::vector<std::string> splitString(const std::string &s, const std::string &se
             }
         }
 
-        //找到又一个分隔符，将两个分隔符之间的字符串取出；
+        // extract the sub-string between two separators
         flag = 0;
         string_size j = i;
         while(j != s.size() && flag == 0)
