@@ -68,13 +68,13 @@ open `roscore` and `rviz`
 
 + defination of tsdf:
 
-< [sdf1] represents the distance measured by lidar
+> [sdf1] represents the distance measured by lidar
 
-< [sdf2] represents the ditance between the hitted grid and robot
+> [sdf2] represents the ditance between the hitted grid and robot
 
 [tsdf3]
 
-< t is the truncation distance
+> t is the truncation distance
 
 + Fusion of multiple observation (weighted average):
 
