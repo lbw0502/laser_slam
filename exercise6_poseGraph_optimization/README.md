@@ -4,31 +4,34 @@ rosbag miss
 
 ## Pose Graph
 
-[pose_graph]
+<dev align=center><img src=./doc/pose_graph.png></dev>
 
 + green line can be viewed as prediction, which is obtained from odometry information (laser odometry, imu, wheel odometry...)
 
-[prediction]
+<dev align=center><img src=./doc/prediction.png></dev>
 
-[form1]
+<dev align=center><img src=./doc/form1.png></dev>
 
-[form2]
+<dev align=center><img src=./doc/form2.png></dev>
 
 + red line can be viewed as observation, whihc is obtained by loop detection.
 
-[observation]
+<dev align=center><img src=./doc/observation.png></dev>
 
 so the error function is defined as:
 
-[error]
+<dev align=center><img src=./doc/error.png></dev>
+
 
 ### Error function in optimization
 
-[opt1]
+<dev align=center><img src=./doc/opt1.png></dev>
+
 
 ### Jacobian Matrix in optimization
 
-[opt2]
+<dev align=center><img src=./doc/opt2.png></dev>
+
 
 ## Code
 
@@ -43,7 +46,8 @@ rosrun ls_slam ls_slam
 
 optimization result is shown in rviz
 
-[result]
+<dev align=center><img src=./doc/result.png></dev>
+
 
 before optimization: blue
 
