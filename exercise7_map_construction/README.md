@@ -4,7 +4,8 @@ data miss
 
 ## Occupancy Map
 
-[occ1]
+<dev align=center><img src=./doc/occ1.png></dev>
+
 
 + [occ2] is the inverse measurement model of lidar.
 
@@ -12,11 +13,13 @@ data miss
 
 + [occ4] represents the prior value of the grid (same for all grids)
 
-[occ5]
+<dev align=center><img src=./doc/occ5.png></dev>
+
 
 **Inverse Measurement Model of Lidar**
 
-[occ6]
+<dev align=center><img src=./doc/occ6.png></dev>
+
 
 + the status of hitted grid is **Occupied**
 
@@ -29,10 +32,9 @@ open `roscore` and `rviz`
 
 `rosrun occupany_mapping occupany_mapping`
 
-[result1]
+<dev align=center><img src=./doc/result1.png></dev>
 
-[result1_detail]
-
+<dev align=center><img src=./doc/result1_detail.png></dev>
 
 
 ## Count Model Map
@@ -53,18 +55,18 @@ open `roscore` and `rviz`
 
 `rosrun count_model_mapping count_model_mapping`
 
-[result2]
+<dev align=center><img src=./doc/result2.png></dev>
 
-[result2_detail]
+<dev align=center><img src=./doc/result2_detail.png></dev>
 
 
 ## TSDF(Trunecated Signed Distance Function) Map
 
-[tsdf1]
+<dev align=center><img src=./doc/tsdf1.png></dev>
 
 + defination of sdf:
 
-[tsdf2]
+<dev align=center><img src=./doc/tsdf2.png></dev>
 
 + defination of tsdf:
 
@@ -72,24 +74,22 @@ open `roscore` and `rviz`
 
 > [sdf2] represents the ditance between the hitted grid and robot
 
-[tsdf3]
+<dev align=center><img src=./doc/tsdf3.png></dev>
 
 > t is the truncation distance
 
 + Fusion of multiple observation (weighted average):
 
-[tsdf4]
+<dev align=center><img src=./doc/tsdf4.png></dev>
 
 the surface of object can be obtained from TSDF field:
 
-[tsdf5]
+<dev align=center><img src=./doc/tsdf5.png></dev>
 
 ### Code
 
 `rosrun tsdf_mapping tsdf_mapping`
 
-[result3]
+<dev align=center><img src=./doc/result3.png></dev>
 
-[result3_detail]
-
-
+<dev align=center><img src=./doc/result3_detail.png></dev>
