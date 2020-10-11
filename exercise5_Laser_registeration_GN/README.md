@@ -1,8 +1,8 @@
 # Laser Regiseration using Gauss-Newton Method
 
 ## Generate a likelihood field of laser data
-[img likelihood field]
-<dev align=center><img src=./doc/result1.png></dev>
+
+<dev align=center><img src=./doc/likelihood.png></dev>
 
 ## Registeration based on optimization method
 
@@ -21,7 +21,7 @@ where
 
 <dev align=center><img src=./doc/gn5.png></dev>
 
-+ [gn6] represents the value at the likelihood field
++ ![](./doc/gn6.png) represents the value at the likelihood field
 
 **H and b of GN:**
 
