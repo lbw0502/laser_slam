@@ -7,11 +7,11 @@ data miss
 <dev align=center><img src=./doc/occ1.png></dev>
 
 
-+ [occ2] is the inverse measurement model of lidar.
++ ![](./doc/occ2.png) is the inverse measurement model of lidar.
 
-+ [occ3] represents the value of grid i at time t-1.
++ ![](./doc/occ3.png) represents the value of grid i at time t-1.
 
-+ [occ4] represents the prior value of the grid (same for all grids)
++ ![](./doc/occ4.png) represents the prior value of the grid (same for all grids)
 
 <dev align=center><img src=./doc/occ5.png></dev>
 
