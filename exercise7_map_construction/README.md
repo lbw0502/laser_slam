@@ -70,9 +70,9 @@ open `roscore` and `rviz`
 
 + defination of tsdf:
 
-> [sdf1] represents the distance measured by lidar
+> ![](./doc/sdf1.png) represents the distance measured by lidar
 
-> [sdf2] represents the ditance between the hitted grid and robot
+> ![](./doc/sdf2.png) represents the ditance between the hitted grid and robot
 
 <dev align=center><img src=./doc/tsdf3.png></dev>
 
