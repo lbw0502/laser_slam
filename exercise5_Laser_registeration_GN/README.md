@@ -2,61 +2,64 @@
 
 ## Generate a likelihood field of laser data
 [img likelihood field]
+<dev align=center><img src=./doc/result1.png></dev>
 
 ## Registeration based on optimization method
 
 target function:
 
-[img gn1]
+<dev align=center><img src=./doc/gn1.png></dev>
+
 
 where
 
-+ [gn1] represents pose of robot
++ ![](./doc/gn2.png) represents pose of robot
 
-+ [gn2] represents coordinate of i-th laser point
++ ![](./doc/gn3.png) represents coordinate of i-th laser point
 
-+ [gn3] represents the transformed coordinate of i-th laser point
++ ![](./doc/gn4.png) represents the transformed coordinate of i-th laser point
 
-[gn4]
+<dev align=center><img src=./doc/gn5.png></dev>
 
-+ [gn5] represents the value at the likelihood field
++ [gn6] represents the value at the likelihood field
 
 **H and b of GN:**
 
-[hb]
+<dev align=center><img src=./doc/hb.png></dev>
 
-[si]
+<dev align=center><img src=./doc/si.png></dev>
 
-[si2] represents the derivative of likelihood field value with respect to position. Since the likelihood field is discrete, we have to use interpolation to solve it.
+![](./doc/si2.png) represents the derivative of likelihood field value with respect to position. Since the likelihood field is discrete, we have to use interpolation to solve it.
 
 **Bilinear interpolation**
 
 assume that there are 4 points on a plane
 
-[inter1]
+<dev align=center><img src=./doc/inter1.png></dev>
 
-let [inter2] and [inter3]
+let ![](./doc/inter2.png) and ![](./doc/inter3.png)
 
 the coresponding coordinates become:
 
-[inter4]
+<dev align=center><img src=./doc/inter4.png></dev>
 
 base function of Lagrangian Interpolation:
 
-[inter5]
+<dev align=center><img src=./doc/inter5.png></dev>
 
 so the interpolation function is:
 
-[inter6]
+<dev align=center><img src=./doc/inter6.png></dev>
 
 plug x and y back to the function:
 
-[inter7]
+<dev align=center><img src=./doc/inter7.png></dev>
 
 so we can obtain the derivative of x and y, respectively:
 
-[inter8]
-[inter9]
+<dev align=center><img src=./doc/inter8.png></dev>
+
+<dev align=center><img src=./doc/inter9.png></dev>
 
 
 ## Code
@@ -75,7 +78,7 @@ rosrun gaussian_newton_scanmatcher gaussian_newton_node
 
 the result is shown in rviz:
 
-[result]
+<dev align=center><img src=./doc/result.png></dev>
 
 green path is the ground truth of robot trajectory
 
